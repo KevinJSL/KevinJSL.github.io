@@ -11,7 +11,9 @@ def index():
 
 @app.route('/cp1', methods = ['GET', 'POST'])
 def asnm1():
-    return render_template("./cp1.html")
+    with open("./templates/cp1.html", "r") as f:
+        html_content = f.read()
+    return render_template_string(html_content)
 
 @app.route('/cp2', methods = ['GET', 'POST'])
 def asnm2():
