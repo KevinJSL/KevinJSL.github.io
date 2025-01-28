@@ -1,11 +1,13 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, render_template_string
 
 app = Flask(__name__, static_url_path='/static')
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    with open("index.html", "r") as f:
+        html_content = f.read()
+    return render_template_string(html_content)
 
 @app.route('/cp1', methods = ['GET', 'POST'])
 def asnm1():
