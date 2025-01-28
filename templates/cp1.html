@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin's Github</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo (replace with your logo) -->
+            <div class="text-2xl font-bold">Global Illuminations</div>
+            
+            <!-- Navigation Menu -->
+            <div class="flex space-x-6">
+                <!-- Home Button -->
+                <button onclick="window.location.href='/'" 
+                        class="px-4 py-2 hover:bg-gray-700 rounded">
+                    Home
+                </button>
+                
+                <!-- Assignment 1 Button -->
+                <button onclick="window.location.href = '/cp1' ; "
+                        class="px-4 py-2 hover:bg-gray-700 rounded">
+                    Checkpoint 1
+                </button>
+                
+                <!-- Assignment 2 Button -->
+                <button onclick="window.location.href = '/cp2' ; "
+                        class="px-4 py-2 hover:bg-gray-700 rounded">
+                    Checkpoint 2
+                </button>
+
+                <!-- Online Activities Button -->
+                <button onclick="window.location.href = '/online_acts' ; "
+                        class="px-4 py-2 hover:bg-gray-700 rounded">
+                    Online Activities
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!--  -->
+    <h2>Assignment 1</h2>
+
+        <!-- Required Information -->
+         <div>
+            <h3>Information</h3>
+            <p>Closest Sphere:</p>
+            <p class="ind">size (x=1.74m, y=1.74m, z=1.74m)</p>
+            <p class="ind">location (x=3.2529m,y=-3.2691m,z=2.5387m)</p>
+
+            <p>Spheres:</p>
+            <p class="ind">size (x=1.4m, y=1.4m, z=1.4m)</p>
+            <p class="ind">location (x=3.7045m,y=-2.1605m,z=1.7716m)</p>
+
+            <p>Floor:</p>
+            <p class="ind">size (x=13.8m, y=6.68m, z=0m)</p>
+            <p class="ind">location (x=0.6734m,y=0.6752m,z=-0.8327m)</p>
+
+            <p>Light Source:</p>
+            <p class="ind">location (x=5.7368m, y=-5.5737m, z=4.6456m)</p>
+
+            <p>Camera:</p>
+            <p class="ind">Position (x=7.3589m, y=-6.9258m, z=4.9583m)</p>
+            <p class="ind"></p>lookat (x=64.559&#176, y=0&#176, z=46.692&#176)</p>
+         </div>
+
+        <!-- Images to show results -->
+        <div>
+            <h3>Results</h3>
+            <p>Goal</p>
+            <img src="/static/goal.png" width=25% height=25%>
+            <p>Blender Remake</p>
+            <img src="static/solid_remake.png" width=25% height=25%>
+            <p>Blender Remake (with color)</p>
+            <img src="static/color_remake.png" width=50% height=50%>
+        </div>
+    </main>
+    <footer class="w-full bg-gray-100 rounded-lg p-8 text-center shadow-md">
+        <p>Created by Kevin Land</p>
+    </footer>
+</body>
+</html>
