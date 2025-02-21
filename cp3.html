@@ -49,14 +49,47 @@
         </div>
     </nav>
 
-    <!--  -->
+    <!-- Full Screen Toggle Function -->
+    <script>
+        function toggleFullscreen(img) {
+            if (!document.fullscreenElement) {
+                img.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+    </script>
 
-    <div>
-        <p>Expected</p>
-        <img src="/static/phong_expected.png" width=25% height=25%>
-        <p>Using my raytracer</p>
-        <img src="static/phong_actual.png" width=25% height=25%>
+    <!-- Main Page -->
+    <div class="grid grid-cols-3 gap-4 p-4">
+        <div>
+            <p>Expected</p>
+            <img src="/static/phong_expected.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Using my raytracer</p>
+            <img src="static/Phong.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Phong-Blinn Model</p>
+            <img src="static/Phong-Blinn.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Multiple Light Sources</p>
+            <img src="static/Multi_light.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Super Sampling</p>
+            <img src="static/Super_Sampling.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Super Sampling Close Up</p>
+            <img src="static/super_compare.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
     </div>
+
 
     <footer class="w-full bg-gray-100 rounded-lg p-8 text-center shadow-md">
         <p>Created by Kevin Land</p>
