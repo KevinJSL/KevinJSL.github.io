@@ -31,6 +31,13 @@ def asnm3():
     return render_template_string(html_content)
 
 
+@app.route('/cp4', methods=['GET', 'POST'])
+def assm4():
+    with open("cp4.html", "r") as f:
+        html_content = f.read()
+    return render_template_string(html_content)
+
+
 @app.route('/online_acts', methods=['GET', 'POST'])
 def oa():
     with open("online_acts.html", "r") as f:

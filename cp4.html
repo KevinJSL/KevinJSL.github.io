@@ -55,14 +55,43 @@
         </div>
     </nav>
 
-    <!--  -->
+    <!-- Full Screen Toggle Function -->
+    <script>
+        function toggleFullscreen(img) {
+            if (!document.fullscreenElement) {
+                img.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+    </script>
 
-    <div>
-        <p>Remake</p>
-        <img src="/static/raytrace_remake.png" width=25% height=25%>
-        <p>Different Angle</p>
-        <img src="static/different_angle.png" width=25% height=25%>
+    <!-- Main Page -->
+    <div class="grid grid-cols-3 gap-4 p-4">
+        <div>
+            <p>Checkerboard</p>
+            <img src="/static/A4_results/checkered.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Random Noise</p>
+            <img src="static/A4_results/random_noise.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Random Noise (tiles)</p>
+            <img src="static/A4_results/individual_tiles.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Image Texture</p>
+            <img src="static/A4_results/monkey.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Brick Texture</p>
+            <img src="static/A4_results/brick.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
     </div>
+
 
     <footer class="w-full bg-gray-100 rounded-lg p-8 text-center shadow-md">
         <p>Created by Kevin Land</p>
