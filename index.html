@@ -11,24 +11,7 @@
 
 <body>      
     <!-- Navigation Bar -->
-  <div id="nav-container"></div>
-
-  <script>
-    fetch('/static/component.html')
-      .then(response => response.text())
-      .then(data => {
-        // Create a temporary DOM element to parse the fetched HTML
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = data;
-
-        // Extract only the nav element
-        const navElement = tempDiv.querySelector('nav');
-        if (navElement) {
-          document.getElementById('nav-container').appendChild(navElement);
-        }
-      })
-      .catch(error => console.error('Error loading template:', error));
-  </script>
+    <div id="nav-bar"></div>
 
     <!-- Centered Gray Box -->
     <div class="w-full bg-gray-100 rounded-lg p-16 text-center shadow-md">
@@ -48,23 +31,9 @@
     </div>
 
     <!-- Footer -->
-    <footer id="test"></footer>
+    <footer id="foot"></footer>
 
-    <script>
-        fetch('/static/component.html')
-        .then(response => response.text())
-        .then(data => {
-            // Create a temporary DOM element to parse the fetched HTML
-            const tempDiv = document.createElement('footer');
-            tempDiv.innerHTML = data;
-
-            // Extract only the footer element
-            const footerElement = tempDiv.querySelector('footer');
-            if (footerElement) {
-                document.getElementById('test').appendChild(footerElement);
-            }
-        })
-        .catch(error => console.error('Error loading template:', error));
-    </script>
+    <!-- Link to external JavaScript file -->
+    <script src="/static/main.js"></script>
 </body>
 </html>

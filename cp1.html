@@ -8,9 +8,10 @@
     <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="/static/styles.css">
 </head>
+
 <body>      
     <!-- Navigation Bar -->
-  <div id="nav-container"></div>
+    <div id="nav-bar"></div>
 
   <script>
     fetch('/static/component.html')
@@ -69,23 +70,9 @@
     
     
     <!-- Footer -->
-    <footer id="test"></footer>
+    <footer id="foot"></footer>
 
-    <script>
-        fetch('/static/component.html')
-        .then(response => response.text())
-        .then(data => {
-            // Create a temporary DOM element to parse the fetched HTML
-            const tempDiv = document.createElement('footer');
-            tempDiv.innerHTML = data;
-
-            // Extract only the footer element
-            const footerElement = tempDiv.querySelector('footer');
-            if (footerElement) {
-                document.getElementById('test').appendChild(footerElement);
-            }
-        })
-        .catch(error => console.error('Error loading template:', error));
-    </script>
+    <!-- Link to external JavaScript file -->
+    <script src="/static/main.js"></script>
 </body>
 </html>
