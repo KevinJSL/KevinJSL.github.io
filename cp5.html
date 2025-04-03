@@ -11,30 +11,31 @@
 
 <body>      
     <!-- Navigation Bar -->
-  <div id="nav-container"></div>
+    <div id="nav-container"></div>
 
-  <script>
-    fetch('/static/component.html')
-      .then(response => response.text())
-      .then(data => {
-        // Create a temporary DOM element to parse the fetched HTML
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = data;
+    <script>
+        fetch('/static/component.html')
+        .then(response => response.text())
+        .then(data => {
+            // Create a temporary DOM element to parse the fetched HTML
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = data;
 
-        // Extract only the nav element
-        const navElement = tempDiv.querySelector('nav');
-        if (navElement) {
-          document.getElementById('nav-container').appendChild(navElement);
-        }
-      })
-      .catch(error => console.error('Error loading template:', error));
-  </script>
+            // Extract only the nav element
+            const navElement = tempDiv.querySelector('nav');
+            if (navElement) {
+                document.getElementById('nav-container').appendChild(navElement);
+            }
+        })
+        .catch(error => console.error('Error loading template:', error));
+    </script>
 
-    <div>
-        <p>Remake</p>
-        <img src="/static/media2/raytrace_remake.png" width=25% height=25%>
-        <p>Different Angle</p>
-        <img src="static/media2/different_angle.png" width=25% height=25%>
+    <!-- Main Page -->
+    <div class="grid grid-cols-3 gap-4 p-4">
+        <div>
+            <p>Reflection</p>
+            <img src="/static/media5/reflection.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
     </div>
 
     <!-- Footer -->

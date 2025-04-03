@@ -5,55 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kevin's Github</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
-<body>
 
+<body>      
     <!-- Navigation Bar -->
-    <nav class="bg-gray-800 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <!-- Logo (replace with your logo) -->
-            <div class="text-2xl font-bold">Global Illuminations</div>
-            
-            <!-- Navigation Menu -->
-            <div class="flex space-x-6">
-                <!-- Home Button -->
-                <button onclick="window.location.href='/'" 
-                        class="px-4 py-2 hover:bg-gray-700 rounded">
-                    Home
-                </button>
-                
-                <!-- Assignment 1 Button -->
-                <button onclick="window.location.href = '/cp1' ; "
-                        class="px-4 py-2 hover:bg-gray-700 rounded">
-                    Checkpoint 1
-                </button>
-                
-                <!-- Assignment 2 Button -->
-                <button onclick="window.location.href = '/cp2' ; "
-                        class="px-4 py-2 hover:bg-gray-700 rounded">
-                    Checkpoint 2
-                </button>
+  <div id="nav-container"></div>
 
-                <!-- Assignment 3 Button -->
-                <button onclick="window.location.href = '/cp3' ; "
-                        class="px-4 py-2 hover:bg-gray-700 rounded">
-                    Checkpoint 3
-                </button>
+  <script>
+    fetch('/static/component.html')
+      .then(response => response.text())
+      .then(data => {
+        // Create a temporary DOM element to parse the fetched HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = data;
 
-                <!-- Assignment 4 Button -->
-                <button onclick="window.location.href = '/cp4' ; "
-                        class="px-4 py-2 hover:bg-gray-700 rounded">
-                    Checkpoint 4
-                </button>
-
-                <!-- Online Activities Button -->
-                <button onclick="window.location.href = '/online_acts' ; "
-                        class="px-4 py-2 hover:bg-gray-700 rounded">
-                    Online Activities
-                </button>
-            </div>
-        </div>
-    </nav>
+        // Extract only the nav element
+        const navElement = tempDiv.querySelector('nav');
+        if (navElement) {
+          document.getElementById('nav-container').appendChild(navElement);
+        }
+      })
+      .catch(error => console.error('Error loading template:', error));
+  </script>
 
     <!-- Full Screen Toggle Function -->
     <script>
@@ -72,29 +47,45 @@
     <div class="grid grid-cols-3 gap-4 p-4">
         <div>
             <p>Checkerboard</p>
-            <img src="/static/A4_results/checkered.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="/static/media4/checkered.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <div>
             <p>Random Noise</p>
-            <img src="static/A4_results/random_noise.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="static/media4/random_noise.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <div>
             <p>Random Noise (tiles)</p>
-            <img src="static/A4_results/individual_tiles.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="static/media4/individual_tiles.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <div>
             <p>Image Texture</p>
-            <img src="static/A4_results/monkey.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="static/media4/monkey.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <div>
             <p>Brick Texture</p>
-            <img src="static/A4_results/brick.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="static/media4/brick.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
     </div>
 
 
-    <footer class="w-full bg-gray-100 rounded-lg p-8 text-center shadow-md">
-        <p>Created by Kevin Land</p>
-    </footer>
+    <!-- Footer -->
+    <footer id="test"></footer>
+
+    <script>
+        fetch('/static/component.html')
+        .then(response => response.text())
+        .then(data => {
+            // Create a temporary DOM element to parse the fetched HTML
+            const tempDiv = document.createElement('footer');
+            tempDiv.innerHTML = data;
+
+            // Extract only the footer element
+            const footerElement = tempDiv.querySelector('footer');
+            if (footerElement) {
+                document.getElementById('test').appendChild(footerElement);
+            }
+        })
+        .catch(error => console.error('Error loading template:', error));
+    </script>
 </body>
 </html>

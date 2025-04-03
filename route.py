@@ -38,9 +38,9 @@ def assm4():
     return render_template_string(html_content)
 
 
-@app.route('/online_acts', methods=['GET', 'POST'])
+@app.route('/cp5', methods=['GET', 'POST'])
 def oa():
-    with open("online_acts.html", "r") as f:
+    with open("cp5.html", "r") as f:
         html_content = f.read()
     return render_template_string(html_content)
 
