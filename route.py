@@ -39,8 +39,14 @@ def assm4():
 
 
 @app.route('/cp5', methods=['GET', 'POST'])
-def oa():
+def assm5():
     with open("cp5.html", "r") as f:
+        html_content = f.read()
+    return render_template_string(html_content)
+
+@app.route('/cp6', methods=['GET', 'POST'])
+def assm6():
+    with open("cp6.html", "r") as f:
         html_content = f.read()
     return render_template_string(html_content)
 
