@@ -44,9 +44,31 @@ def assm5():
         html_content = f.read()
     return render_template_string(html_content)
 
+
 @app.route('/cp6', methods=['GET', 'POST'])
 def assm6():
     with open("cp6.html", "r") as f:
+        html_content = f.read()
+    return render_template_string(html_content)
+
+
+@app.route('/cp7', methods=['GET', 'POST'])
+def assm7():
+    with open("cp7.html", "r") as f:
+        html_content = f.read()
+    return render_template_string(html_content)
+
+
+@app.route('/KD', methods=['GET', 'POST'])
+def assmKD():
+    with open("KD.html", "r") as f:
+        html_content = f.read()
+    return render_template_string(html_content)
+
+
+@app.route('/volume', methods=['GET', 'POST'])
+def assmFinal():
+    with open("volume.html", "r") as f:
         html_content = f.read()
     return render_template_string(html_content)
 
