@@ -3,32 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kevin's Github</title>
+    <title>Kevin Land | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 
-<body>      
-    <!-- Navigation Bar -->
-    <div id="nav-bar"></div>
+<body class="bg-gray-50">
+    <!-- Navigation / Header -->
+    <header class="flex items-center justify-between p-6 bg-white shadow-md">
+        <h1 class="text-3xl font-bold text-gray-800">Kevin Land</h1>
+        <img src="static/home_media/me.jpg" alt="Kevin Land photo" class="w-24 h-24 rounded-full object-cover border-4 border-gray-200">
+    </header>
 
-    <!-- Centered Gray Box -->
-    <div class="w-full bg-gray-100 rounded-lg p-16 text-center shadow-md">
-        <!-- Bio -->
-        <p>Welcome to my website! 
-            This site serves as a platform for submitting assignments for my Global Illuminations course, 
-            which focuses on ray tracing. In this course, we work through multiple checkpoints to gradually 
-            build up our skills and replicate complex images using ray tracing techniques. Each submission 
-            corresponds to one of these checkpoints, where I present the work completed and explain the process 
-            I followed to achieve the final result.
+    <!-- About Me Section -->
+    <section class="flex flex-col md:flex-row items-start justify-center p-8">
+        <div class="md:w-1/2 text-left md:pr-8">
+            <p class="text-gray-700 leading-relaxed">
+                I am a passionate developer and designer interested in computer graphics, 
+                ray tracing, and creating visually stunning digital experiences. 
+                My work blends technical expertise with a creative eye, whether I\’m 
+                coding, designing, or exploring new technologies.
+            </p>
+        </div>
+    </section>
 
-            Ray tracing is a rendering technique that simulates the way light interacts with objects in a 
-            virtual scene, producing highly realistic images. Throughout the course, I will be learning various 
-            aspects of ray tracing, from understanding light behavior to optimizing performance for faster 
-            rendering. The assignments on this website will showcase my progress as I work toward mastering 
-            this powerful tool.</p>
-    </div>
+    <!-- Links to Projects -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 pb-12">
+        <a href="personal-projects.html" class="block group">
+            <img src="static/home_media/code.webp" alt="Personal Projects" class="w-48 h-48 object-cover rounded-lg">
+            <h3 class="text-xl mt-2 text-center font-semibold text-gray-800">Personal Projects</h3>
+        </a>
+        <a href="publication.html" class="block group">
+            <img src="static/home_media/publication.jpg" alt="Publication" class="w-48 h-48 object-cover rounded-lg">
+            <h3 class="text-xl mt-2 text-center font-semibold text-gray-800">Publication</h3>
+        </a>
+        <a href="school-work.html" class="block group">
+            <img src="static/home_media/school.jpg" alt="School Work" class="w-48 h-48 object-cover rounded-lg">
+            <h3 class="text-xl mt-2 text-center font-semibold text-gray-800">School Work</h3>
+        </a>
+    </section>
 
     <!-- Footer -->
     <footer id="foot"></footer>
