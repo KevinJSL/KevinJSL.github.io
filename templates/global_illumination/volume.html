@@ -6,7 +6,7 @@
     <title>Kevin's Github</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/global_illumination/styles.css">
 </head>
 
 <body>      
@@ -14,7 +14,7 @@
     <div id="nav-bar"></div>
 
     <script>
-        fetch('/static/component.html')
+        fetch('/static/global_illumination/component.html')
         .then(response => response.text())
         .then(data => {
             // Create a temporary DOM element to parse the fetched HTML
@@ -63,7 +63,7 @@
             of the object and a given radius. At first, I used the basic ray marching algorithm and Beer's law 
             to build a homogeneous volume on the screen.
         </p>
-        <img src="/static/mediaV/homogeneos.png" alt="Homogeneous Volume">
+        <img src="/static/global_illumination/mediaV/homogeneos.png" alt="Homogeneous Volume">
 
         <p>
             Then I modified that shader to use Beer's law at multiple steps through the volume to be able to 
@@ -74,7 +74,7 @@
             volume.
         </p>
         <video controls>
-            <source src="/static/mediaV/heter_smoke.mp4" type="video/mp4">
+            <source src="/static/global_illumination/mediaV/heter_smoke.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <p>
@@ -86,11 +86,11 @@
         <h2><strong>Results – Pretty Pictures</strong></h2>
         <p>Here are the scenes that I created with my ray marching shader.</p>
         <video controls>
-            <source src="/static/mediaV/forest_fire.mp4" type="video/mp4">
+            <source src="/static/global_illumination/mediaV/forest_fire.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <video controls>
-            <source src="/static/mediaV/forest_fire(2).mp4" type="video/mp4">
+            <source src="/static/global_illumination/mediaV/forest_fire(2).mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
@@ -99,11 +99,11 @@
             a more interesting result that emulated northern lights.
         </p>
         <video controls>
-            <source src="/static/mediaV/northern_lights_test.mp4" type="video/mp4">
+            <source src="/static/global_illumination/mediaV/northern_lights_test.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <video controls>
-            <source src="/static/mediaV/northern_loghts.mp4" type="video/mp4">
+            <source src="/static/global_illumination/mediaV/northern_loghts.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
@@ -120,6 +120,6 @@
     <footer id="foot"></footer>
 
     <!-- Link to external JavaScript file -->
-    <script src="/static/main.js"></script>
+    <script src="/static/global_illumination/main.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
     <title>Kevin's Github</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/global_illumination/styles.css">
 </head>
 
 <body>      
@@ -14,7 +14,7 @@
     <div id="nav-bar"></div>
 
     <script>
-        fetch('/static/component.html')
+        fetch('/static/global_illumination/component.html')
         .then(response => response.text())
         .then(data => {
             // Create a temporary DOM element to parse the fetched HTML
@@ -34,19 +34,19 @@
     <div class="grid grid-cols-3 gap-4 p-4">
         <div>
             <p>Refraction</p>
-            <img src="/static/media6/Refraction.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="/static/global_illumination/media6/Refraction.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <div>
             <p>Low Refraction (0.2) </p>
-            <img src="/static/media6/Final_0.2.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="/static/global_illumination/media6/Final_0.2.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <div>
             <p>High Refraction (0.8) </p>
-            <img src="/static/media6/Final_0.8.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="/static/global_illumination/media6/Final_0.8.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <div>
             <p>Modified Shadows</p>
-            <img src="/static/media6/modified_shadow.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="/static/global_illumination/media6/modified_shadow.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
     </div>
 
@@ -54,6 +54,6 @@
     <footer id="foot"></footer>
 
     <!-- Link to external JavaScript file -->
-    <script src="/static/main.js"></script>
+    <script src="/static/global_illumination/main.js"></script>
 </body>
 </html>

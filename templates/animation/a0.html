@@ -6,7 +6,7 @@
     <title>Kevin's Github</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="/static/global_illumination/styles.css">
+    <link rel="stylesheet" href="/static/animation/styles.css">
 </head>
 
 <body>      
@@ -14,7 +14,7 @@
     <div id="nav-bar"></div>
 
     <script>
-        fetch('/static/global_illumination/component.html')
+        fetch('/static/animation/component.html')
         .then(response => response.text())
         .then(data => {
             // Create a temporary DOM element to parse the fetched HTML
@@ -31,17 +31,18 @@
     </script>
 
     <!-- Main Page -->
-    <div class="grid grid-cols-3 gap-4 p-4">
-        <div>
-            <p>Reflection</p>
-            <img src="/static/global_illumination/media5/reflection.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
-        </div>
-    </div>
+
+    <section style="max-width: 800px; margin: 0 auto; padding: 20px;">
+        <video controls>
+            <source src="/static/animation/media_a0/A0_video.mov" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </section>
 
     <!-- Footer -->
     <footer id="foot"></footer>
 
     <!-- Link to external JavaScript file -->
-    <script src="/static/global_illumination/main.js"></script>
+    <script src="/static/animation/main.js"></script>
 </body>
 </html>

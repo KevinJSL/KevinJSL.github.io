@@ -6,7 +6,7 @@
     <title>Kevin's Github</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/global_illumination/styles.css">
 </head>
 
 <body>      
@@ -14,7 +14,7 @@
     <div id="nav-bar"></div>
 
   <script>
-    fetch('/static/component.html')
+    fetch('/static/global_illumination/component.html')
       .then(response => response.text())
       .then(data => {
         // Create a temporary DOM element to parse the fetched HTML
@@ -60,11 +60,11 @@
         <div>
             <h3>Results</h3>
             <p>Goal</p>
-            <img src="/static/media1/goal.png" width=25% height=25%>
+            <img src="/static/global_illumination/media1/goal.png" width=25% height=25%>
             <p>Blender Remake</p>
-            <img src="static/media1/solid_remake.png" width=25% height=25%>
+            <img src="static/global_illumination/media1/solid_remake.png" width=25% height=25%>
             <p>Blender Remake (with color)</p>
-            <img src="static/media1/color_remake.png" width=50% height=50%>
+            <img src="static/global_illumination/media1/color_remake.png" width=50% height=50%>
         </div>
     </main>
     
@@ -73,6 +73,6 @@
     <footer id="foot"></footer>
 
     <!-- Link to external JavaScript file -->
-    <script src="/static/main.js"></script>
+    <script src="/static/global_illumination/main.js"></script>
 </body>
 </html>

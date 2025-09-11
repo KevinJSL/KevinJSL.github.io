@@ -6,7 +6,7 @@
     <title>Kevin's Github</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/global_illumination/styles.css">
 </head>
 
 <body>      
@@ -14,7 +14,7 @@
     <div id="nav-bar"></div>
 
     <script>
-        fetch('/static/component.html')
+        fetch('/static/global_illumination/component.html')
         .then(response => response.text())
         .then(data => {
             // Create a temporary DOM element to parse the fetched HTML
@@ -34,23 +34,23 @@
     <div class="grid grid-cols-3 gap-4 p-4">
         <div>
             <p>Initial test of res3 took 45 minutes because of a loop error. </p>
-            <img src="/static/mediaKD/res3_loop_issue.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="/static/global_illumination/mediaKD/res3_loop_issue.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <div>
             <p> Then I brough it down, but shadows weren't using KD trees. </p>
-            <img src="/static/mediaKD/res3_w_shadows.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="/static/global_illumination/mediaKD/res3_w_shadows.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <div>
             <p> Finally, I got res3 to work with KD trees. </p>
-            <img src="/static/mediaKD/res3_no_shadows.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="/static/global_illumination/mediaKD/res3_no_shadows.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <div>
             <p> Here is the res3 result when the camera was adjusted and phong was correctly implemented for triangles. </p>
-            <img src="/static/mediaKD/res3_final.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="/static/global_illumination/mediaKD/res3_final.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <div>
             <p>Here is the final results using the full bunny data (not res3)</p>
-            <img src="/static/mediaKD/final_stats.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+            <img src="/static/global_illumination/mediaKD/final_stats.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
         </div>
         <p>
             All of the photos have statistics on how long they took in the console. Overall, 
@@ -65,6 +65,6 @@
     <footer id="foot"></footer>
 
     <!-- Link to external JavaScript file -->
-    <script src="/static/main.js"></script>
+    <script src="/static/global_illumination/main.js"></script>
 </body>
 </html>

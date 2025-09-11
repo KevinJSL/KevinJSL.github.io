@@ -6,15 +6,17 @@
       </div>
 
       <!-- Home Button, pushed to the left -->
-      <button onclick="window.location.href='/'" 
+      <button onclick="window.location.href='/sw'" 
               class="text-white px-4 py-2 hover:bg-gray-700 rounded">
-          Home
+          Back to School
       </button>
 
       <!-- Navigation Dropdown Menu -->
       <div class="lg:flex hidden">
           <select id="nav-dropdown" onchange="window.location.href=this.value" 
                   class="bg-gray-400 text-gray-800 p-2 rounded hover:bg-gray-500">
+              <option>Choose Page</option>
+              <option value="/gi">Home</option>
               <option value="/cp1">Checkpoint 1</option>
               <option value="/cp2">Checkpoint 2</option>
               <option value="/cp3">Checkpoint 3</option>

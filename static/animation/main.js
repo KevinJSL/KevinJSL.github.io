@@ -22,8 +22,8 @@ async function loadComponent(url, targetElementId, selector) {
 
 // Load navigation and footer components
 document.addEventListener('DOMContentLoaded', () => {
-    loadComponent('/static/component.html', 'nav-bar', 'nav');
-    loadComponent('/static/component.html', 'foot', 'footer');
+    loadComponent('/static/animation/component.html', 'nav-bar', 'nav');
+    loadComponent('/static/animation/component.html', 'foot', 'footer');
 });
 
 const hamburgerIcon = document.getElementById('hamburger-icon');
