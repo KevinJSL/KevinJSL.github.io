@@ -29,15 +29,15 @@
 
     <!-- Links to Projects -->
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 pb-12">
-        <a href="personal-projects.html" class="block group">
+        <a href="{{ url_for('projects') }}" class="block group">
             <img src="static/home_media/code.webp" alt="Personal Projects" class="w-48 h-48 object-cover rounded-lg">
             <h3 class="text-xl mt-2 text-center font-semibold text-gray-800">Personal Projects</h3>
         </a>
-        <a href="publication.html" class="block group">
+        <a href="{{ url_for('papers') }}" class="block group">
             <img src="static/home_media/publication.jpg" alt="Publication" class="w-48 h-48 object-cover rounded-lg">
-            <h3 class="text-xl mt-2 text-center font-semibold text-gray-800">Publication</h3>
+            <h3 class="text-xl mt-2 text-center font-semibold text-gray-800">Papers</h3>
         </a>
-        <a href="school-work.html" class="block group">
+        <a href="{{ url_for('school_work') }}" class="block group" value="sw">
             <img src="static/home_media/school.jpg" alt="School Work" class="w-48 h-48 object-cover rounded-lg">
             <h3 class="text-xl mt-2 text-center font-semibold text-gray-800">School Work</h3>
         </a>

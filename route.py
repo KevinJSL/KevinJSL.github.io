@@ -1,13 +1,24 @@
-from flask import Flask, render_template_string
+from flask import Flask, render_template_string, render_template
 
 app = Flask(__name__, static_url_path='/static')
 
 
 @app.route('/')
 def index():
-    with open("index.html", "r") as f:
-        html_content = f.read()
-    return render_template_string(html_content)
+    return render_template("index.html")
+
+
+@app.route('/sw')
+def school_work():
+    return render_template('school-work.html')
+
+@app.route('/pp')
+def projects():
+    return render_template('personal-projects.html')
+
+@app.route('/p')
+def papers():
+    return render_template('publications.html')
 
 
 @app.route('/cp1', methods=['GET', 'POST'])

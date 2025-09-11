@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Work | Kevin Land</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body class="bg-gray-50">
+  <!-- Header -->
+  <header class="flex items-center justify-between p-6 bg-white shadow-md">
+    <h1 class="text-3xl font-bold text-gray-800">School Work</h1>
+    <a href="{{ url_for('index') }}" class="text-blue-600 hover:underline">← Back to Home</a>
+  </header>
+
+  <!-- Grid of Classes -->
+  <main class="p-8">
+    <!-- Responsive grid: 1 column on small screens, up to 3 on large -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      
+      <!-- Animation -->
+      <a href="animation.html" 
+         class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold text-gray-800 mb-2">Animation</h3>
+        <p class="text-gray-600">Projects and assignments exploring character and motion design.</p>
+      </a>
+
+      <!-- Global Illumination -->
+      <a href="global-illumination.html" 
+         class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold text-gray-800 mb-2">Global Illumination</h3>
+        <p class="text-gray-600">Coursework focused on ray tracing and realistic lighting techniques.</p>
+      </a>
+
+      <!-- Add more classes here as needed -->
+      <!--
+      <a href="class-name.html" class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
+        <h3 class="text-xl font-bold text-gray-800 mb-2">Class Name</h3>
+        <p class="text-gray-600">Short description of the class or work.</p>
+      </a>
+      -->
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center text-gray-500 py-6">
+    © 2025 Kevin Land. All rights reserved.
+  </footer>
+</body>
+</html>
