@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin's Github</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>      
+    <!-- Navigation Bar -->
+    <div id="nav-bar"></div>
+
+  <script>
+    fetch('/static/component.html')
+      .then(response => response.text())
+      .then(data => {
+        // Create a temporary DOM element to parse the fetched HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = data;
+
+        // Extract only the nav element
+        const navElement = tempDiv.querySelector('nav');
+        if (navElement) {
+          document.getElementById('nav-container').appendChild(navElement);
+        }
+      })
+      .catch(error => console.error('Error loading template:', error));
+  </script>
+
+    <!-- Full Screen Toggle Function -->
+    <script>
+        function toggleFullscreen(img) {
+            if (!document.fullscreenElement) {
+                img.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+    </script>
+
+    <!-- Main Page -->
+    <div class="grid grid-cols-3 gap-4 p-4">
+        <div>
+            <p>Expected</p>
+            <img src="/static/media3/phong_expected.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Using my raytracer</p>
+            <img src="static/media3/Phong.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Phong-Blinn Model</p>
+            <img src="static/media3/Phong-Blinn.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Multiple Light Sources</p>
+            <img src="static/media3/Multi_light.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Super Sampling</p>
+            <img src="static/media3/Super_Sampling.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+        <div>
+            <p>Super Sampling Close Up</p>
+            <img src="static/media3/super_compare.png" width="100%" class="cursor-pointer" onclick="toggleFullscreen(this)">
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer id="foot"></footer>
+
+    <!-- Link to external JavaScript file -->
+    <script src="/static/main.js"></script>
+</body>
+</html>

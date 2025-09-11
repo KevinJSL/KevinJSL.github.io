@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin's Github</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>      
+    <!-- Navigation Bar -->
+    <div id="nav-bar"></div>
+
+  <script>
+    fetch('/static/component.html')
+      .then(response => response.text())
+      .then(data => {
+        // Create a temporary DOM element to parse the fetched HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = data;
+
+        // Extract only the nav element
+        const navElement = tempDiv.querySelector('nav');
+        if (navElement) {
+          document.getElementById('nav-container').appendChild(navElement);
+        }
+      })
+      .catch(error => console.error('Error loading template:', error));
+  </script>
+
+    <!--  -->
+    <h2>Assignment 1</h2>
+
+        <!-- Required Information -->
+         <div>
+            <h3>Information</h3>
+            <p>Closest Sphere:</p>
+            <p class="ind">size (x=1.74m, y=1.74m, z=1.74m)</p>
+            <p class="ind">location (x=3.2529m,y=-3.2691m,z=2.5387m)</p>
+
+            <p>Spheres:</p>
+            <p class="ind">size (x=1.4m, y=1.4m, z=1.4m)</p>
+            <p class="ind">location (x=3.7045m,y=-2.1605m,z=1.7716m)</p>
+
+            <p>Floor:</p>
+            <p class="ind">size (x=13.8m, y=6.68m, z=0m)</p>
+            <p class="ind">location (x=0.6734m,y=0.6752m,z=-0.8327m)</p>
+
+            <p>Light Source:</p>
+            <p class="ind">location (x=5.7368m, y=-5.5737m, z=4.6456m)</p>
+
+            <p>Camera:</p>
+            <p class="ind">Position (x=7.3589m, y=-6.9258m, z=4.9583m)</p>
+            <p class="ind"></p>lookat (x=64.559&#176, y=0&#176, z=46.692&#176)</p>
+         </div>
+
+        <!-- Images to show results -->
+        <div>
+            <h3>Results</h3>
+            <p>Goal</p>
+            <img src="/static/media1/goal.png" width=25% height=25%>
+            <p>Blender Remake</p>
+            <img src="static/media1/solid_remake.png" width=25% height=25%>
+            <p>Blender Remake (with color)</p>
+            <img src="static/media1/color_remake.png" width=50% height=50%>
+        </div>
+    </main>
+    
+    
+    <!-- Footer -->
+    <footer id="foot"></footer>
+
+    <!-- Link to external JavaScript file -->
+    <script src="/static/main.js"></script>
+</body>
+</html>
