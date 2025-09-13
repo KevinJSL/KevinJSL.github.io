@@ -9,39 +9,66 @@
 </head>
 
 <body class="bg-gray-50">
-    <!-- Navigation / Header -->
-    <header class="flex items-center justify-between p-6 bg-white shadow-md">
-        <h1 class="text-3xl font-bold text-gray-800">Kevin Land</h1>
-        <img src="static/home_media/me.jpg" alt="Kevin Land photo" class="w-24 h-24 rounded-full object-cover border-4 border-gray-200">
-    </header>
+<!-- Hero / Intro Section -->
+<section class="bg-gradient-to-r from-blue-300 via-blue-350 to-blue-900 text-white text-center py-24 px-6">
+    <h1 class="text-5xl md:text-6xl font-extrabold mb-6">Kevin Land</h1>
+    <!-- New Hero Image -->
+    <img src="static/home_media/me.jpg"
+             alt="Kevin working on a graphics project"
+             class="mx-auto mb-10 w-32 h-32 md:w-32 md:h-32 objecst-cover rounded-xl shadow-lg border-4 border-white">
 
-    <!-- About Me Section -->
-    <section class="flex flex-col md:flex-row items-start justify-center p-8">
-        <div class="md:w-1/2 text-left md:pr-8">
-            <p class="text-gray-700 leading-relaxed">
-                I am a passionate developer and designer interested in computer graphics, 
-                ray tracing, and creating visually stunning digital experiences. 
-                My work blends technical expertise with a creative eye, whether I\’m 
-                coding, designing, or exploring new technologies.
-            </p>
-        </div>
-    </section>
+    <p class="text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed mb-8">
+        Developer & Designer passionate about computer graphics, ray tracing,
+        and creating visually stunning digital experiences.
+    </p>
 
-    <!-- Links to Projects -->
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 px-8 pb-12">
-        <a href="{{ url_for('projects') }}" class="block group">
-            <img src="static/home_media/code.webp" alt="Personal Projects" class="w-48 h-48 object-cover rounded-lg">
-            <h3 class="text-xl mt-2 text-center font-semibold text-gray-800">Personal Projects</h3>
-        </a>
-        <a href="{{ url_for('papers') }}" class="block group">
-            <img src="static/home_media/publication.jpg" alt="Publication" class="w-48 h-48 object-cover rounded-lg">
-            <h3 class="text-xl mt-2 text-center font-semibold text-gray-800">Papers</h3>
-        </a>
-        <a href="{{ url_for('school_work') }}" class="block group" value="sw">
-            <img src="static/home_media/school.jpg" alt="School Work" class="w-48 h-48 object-cover rounded-lg">
-            <h3 class="text-xl mt-2 text-center font-semibold text-gray-800">School Work</h3>
-        </a>
-    </section>
+    <a href="https://www.linkedin.com/in/kevin-land-401b88250/"
+         class="inline-block mt-4 px-8 py-3 bg-white text-indigo-700 font-semibold rounded-full shadow hover:bg-gray-100 transition">
+         View My LinkedIn
+    </a>
+</section>
+</section>
+
+    <!-- Long Image Buttons Section -->
+<section class="max-w-5xl mx-auto px-6 py-12 space-y-6">
+
+    <!-- Example Button 2 -->
+  <a href="{{ url_for('school_work') }}"
+     class="group relative block h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden shadow-lg">
+    <img src="static/home_media/school.jpg"
+         class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+    <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition"></div>
+    <h3 class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold tracking-wide">
+      Schoolwork
+    </h3>
+  </a>
+
+
+  <!-- Example Button 1 -->
+  <a href="{{ url_for('projects') }}"
+     class="group relative block h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden shadow-lg">
+    <img src="static/home_media/code.webp"
+         class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+    <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition"></div>
+    <h3 class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold tracking-wide">
+      Personal Projects
+    </h3>
+  </a>
+
+  <!-- Example Button 2 -->
+  <a href="{{ url_for('papers') }}"
+     class="group relative block h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden shadow-lg">
+    <img src="static/home_media/publication.jpg"
+         class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+    <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition"></div>
+    <h3 class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold tracking-wide">
+      Papers
+    </h3>
+  </a>
+
+</section>
+
+
 
     <!-- Footer -->
     <footer id="foot"></footer>
