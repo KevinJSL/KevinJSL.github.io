@@ -1,79 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kevin Land | Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/static/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kevin Land | Portfolio</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #ffffff;
+      --secondary: #000000;
+      --accent:  #ff3366;
+      --light:   #1a1a1a;
+      --muted:   #bdb5b5;
+      --transition: all 0.3s ease;
+    }
+
+    *,*::before,*::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--secondary);
+      color: var(--primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      inset: 0 auto auto 0;
+      width: 100%;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--primary);
+    }
+    .logo span { color: var(--accent); }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      transition: var(--transition);
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 500;
+      position: relative;
+      transition: var(--transition);
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+    .nav-links a:hover::after { width: 100%; }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--primary);
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: clamp(6rem, 12vh, 10rem) 5% 4rem;
+      gap: 2rem;
+    }
+
+    .hero-content {
+      flex: 1 1 350px;
+      max-width: 600px;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+    }
+    .hero p {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      margin-bottom: 2rem;
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: var(--accent);
+      color: var(--secondary);
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255,51,102,0.3);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      margin-left: 1rem;
+    }
+    .btn-outline:hover {
+      background: var(--accent);
+      color: var(--secondary);
+    }
+
+    .hero-image {
+      flex: 1 1 250px;
+      max-width: 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(136,50,50,0.5);
+    }
+    .hero-image img { width: 100%; height: auto; display: block; }
+
+    /* SERVICES / REPOSITORY */
+    .services {
+      padding: 6rem 5%;
+      background: var(--light);
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-title h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 0.5rem;
+    }
+    .section-title p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+    .service-card {
+      background: #111;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: var(--transition);
+      text-align: center;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    }
+    .service-icon {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .service-card p { color: var(--muted); margin: 1rem 0 1.5rem; }
+
+    /* PROJECTS */
+    .projects { padding: 6rem 5%; }
+
+    /* RESPONSIVE NAVIGATION */
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        position: fixed;
+        top: 70px; left: 0;
+        width: 100%;
+        flex-direction: column;
+        background: var(--secondary);
+        padding: 2rem 0;
+        gap: 1.5rem;
+        transform: translateY(-150%);
+        box-shadow: 0 10px 15px rgba(0,0,0,0.4);
+      }
+      .nav-links.active { transform: translateY(0); }
+    }
+
+    .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    }
+    .project-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    height: 400px;
+    }
+    .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+    }
+    .project-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    padding: 2rem;
+    color: var(--primary);
+    transform: translateY(100px);
+    opacity: 0;
+    transition: var(--transition);
+    }
+    .project-card:hover .project-overlay {
+    transform: translateY(0);
+    opacity: 1;
+    }
+    .project-card:hover .project-image {
+    transform: scale(1.05);
+    }
+
+  </style>
 </head>
 
-<body class="bg-gray-50">
-<!-- Hero / Intro Section -->
-<section class="bg-gradient-to-r from-blue-300 via-blue-350 to-blue-900 text-white text-center py-24 px-6">
-    <h1 class="text-5xl md:text-6xl font-extrabold mb-6">Kevin Land</h1>
-    <!-- New Hero Image -->
-    <img src="static/home_media/me.jpg"
-             alt="Kevin working on a graphics project"
-             class="mx-auto mb-10 w-32 h-32 md:w-32 md:h-32 objecst-cover rounded-xl shadow-lg border-4 border-white">
+<body>
+  <header>
+    <a href="#" class="logo">Kevin Land<span>.</span></a>
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#services">Repository</a>
+        <a href="#projects">Featured</a>
+      </div>
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+  </header>
 
-    <p class="text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed mb-8">
-        Developer & Designer passionate about computer graphics, ray tracing,
-        and creating visually stunning digital experiences.
-    </p>
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <h1>Computer Science @ RIT</h1>
+        <p>
+          I am Kevin Land, a master's student in my final semester at Rochester
+          Institute of Technology. My courses include computer graphics,
+          artificial intelligence and quantum computing. My final months will be
+          spent on my capstone project and research.
+        </p>
+        <a href="https://www.linkedin.com/in/kevin-land-401b88250/"
+           class="btn btn-outline">LinkedIn</a>
+        <a href="#projects" class="btn btn-outline">Contact</a>
+      </div>
+      <div class="hero-image">
+        <img src="static/media_home/me.jpg" alt="Headshot">
+      </div>
+    </section>
 
-    <a href="https://www.linkedin.com/in/kevin-land-401b88250/"
-         class="inline-block mt-4 px-8 py-3 bg-white text-indigo-700 font-semibold rounded-full shadow hover:bg-gray-100 transition">
-         View My LinkedIn
-    </a>
-</section>
-</section>
+    <!-- Repository -->
+    <section class="services" id="services">
+      <div class="section-title">
+        <h2>Coding Repository</h2>
+        <p>Past works I have accumulated on my coding journey!</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
+          <h3>Schoolwork</h3>
+          <p>Coding assignments and projects within RIT.</p>
+          <a href="{{ url_for('school_work') }}" class="btn">Learn more</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-code"></i></div>
+          <h3>Projects</h3>
+          <p>Applications I built based off of self interest.</p>
+          <a href="{{ url_for('projects') }}" class="btn">Learn more</a>
+        </div>
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3>Papers</h3>
+          <p>Research papers I've contributed to.</p>
+          <a href="{{ url_for('papers') }}" class="btn">Learn more</a>
+        </div>
+      </div>
+    </section>
 
-    <!-- Long Image Buttons Section -->
-<section class="max-w-5xl mx-auto px-6 py-12 space-y-6">
+    <!-- Projects -->
+    <section class="projects" id="projects">
+      <div class="section-title">
+        <h2>Featured Projects</h2>
+        <p>Check out my most recent projects.</p>
+      </div>
 
-    <!-- Example Button 2 -->
-  <a href="{{ url_for('school_work') }}"
-     class="group relative block h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden shadow-lg">
-    <img src="static/home_media/school.jpg"
-         class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-    <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition"></div>
-    <h3 class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold tracking-wide">
-      Schoolwork
-    </h3>
-  </a>
+      <!-- <div class="projects-grid">
+        <div class="project-card">
+            <img
+            src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1470&q=80"
+            alt="E-commerce Platform"
+            class="project-image"
+            >
+            <div class="project-overlay">
+            <h3>E-commerce Platform</h3>
+            <p>A modern e-commerce solution with a seamless checkout experience.</p>
+            <a href="#" class="btn">View case study</a>
+            </div>
+        </div>
 
+        <div class="project-card">
+            <img
+            src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?auto=format&fit=crop&w=1470&q=80"
+            alt="Fitness App"
+            class="project-image"
+            >
+            <div class="project-overlay">
+            <h3>Fitness App</h3>
+            <p>Mobile application for tracking workouts and nutrition.</p>
+            <a href="#" class="btn">View case study</a>
+            </div>
+        </div>
 
-  <!-- Example Button 1 -->
-  <a href="{{ url_for('projects') }}"
-     class="group relative block h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden shadow-lg">
-    <img src="static/home_media/code.webp"
-         class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-    <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition"></div>
-    <h3 class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold tracking-wide">
-      Personal Projects
-    </h3>
-  </a>
+        <div class="project-card">
+            <img
+            src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1469&q=80"
+            alt="Corporate Website"
+            class="project-image"
+            >
+            <div class="project-overlay">
+            <h3>Corporate Website</h3>
+            <p>Redesigned website for a financial services company.</p>
+            <a href="#" class="btn">View case study</a>
+            </div>
+        </div>
+        </div> -->
 
-  <!-- Example Button 2 -->
-  <a href="{{ url_for('papers') }}"
-     class="group relative block h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden shadow-lg">
-    <img src="static/home_media/publication.jpg"
-         class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-    <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-50 transition"></div>
-    <h3 class="absolute inset-0 flex items-center justify-center text-white text-2xl font-bold tracking-wide">
-      Papers
-    </h3>
-  </a>
+      
+    </section>
+  </main>
 
-</section>
-
-
-
-    <!-- Footer -->
-    <footer id="foot"></footer>
-
-    <!-- Link to external JavaScript file -->
-    <script src="/static/main.js"></script>
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks   = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
