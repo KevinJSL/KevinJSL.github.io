@@ -1,41 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kevin's Github</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Link to the external CSS file -->
-    <link rel="stylesheet" href="/static/animation/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kevin's Portfolio | UE5 Keyframing</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Your external stylesheet -->
+  <link rel="stylesheet" href="/static/animation/styles.css" />
 </head>
+<body class="bg-gray-950 text-gray-100 leading-relaxed">
 
-<body>      
-    <!-- Navigation Bar -->
-    <div id="nav-bar"></div>
+  <!-- ===== Navigation Bar ===== -->
+  <div id="nav-container"></div>
+  <script>
+    fetch('/static/animation/component.html')
+      .then(r => r.text())
+      .then(html => {
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+        const nav = temp.querySelector('nav');
+        if (nav) document.getElementById('nav-container').appendChild(nav);
+      })
+      .catch(err => console.error('Error loading nav:', err));
+  </script>
 
-    <script>
-        fetch('/static/animation/component.html')
-        .then(response => response.text())
-        .then(data => {
-            // Create a temporary DOM element to parse the fetched HTML
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = data;
+  <!-- ===== Main Content ===== -->
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-10">
+    <header>
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">Building a Custom Keyframing System in Unreal Engine 5</h1>
+      <p class="text-gray-400">Assignment write-up by Kevin Land</p>
+    </header>
 
-            // Extract only the nav element
-            const navElement = tempDiv.querySelector('nav');
-            if (navElement) {
-                document.getElementById('nav-container').appendChild(navElement);
-            }
-        })
-        .catch(error => console.error('Error loading template:', error));
-    </script>
+    <section>
+      <p>
+        In this assignment, our class was tasked to build our own keyframing system given an input text file
+        where a key frame was denoted by a row of time, position, and axis-angle rotation.
+        Here's how I did that in Unreal Engine 5:
+      </p>
+    </section>
 
-    <!-- Main Page -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-2">1. Data Import</h2>
+      <p>
+        The best way I found to import the supplied text file was as a <strong>Data Table</strong>.
+        Because UE5 requires CSV, I manually converted the <code>.txt</code> to a CSV
+        (only 10 rows). I then built a Blueprint function to read rows from the Data Table.
+      </p>
+      <img src="/static/animation/media_a1/data_access.png" alt="Blueprint data access" class="rounded-lg shadow mt-4">
+    </section>
 
-    <!-- Footer -->
-    <footer id="foot"></footer>
+    <section>
+      <h2 class="text-2xl font-semibold mb-2">2. Mapping <code>t</code> → <code>u</code></h2>
+      <p>
+        I used a Timer to loop through each row and let the Tick function interpolate each frame.
+        The timer delay is a variable <code>Duration</code>; <code>u</code> increments every Tick within that delay.
+      </p>
+      <img src="/static/animation/media_a1/timer.png" alt="Timer blueprint" class="rounded-lg shadow mt-4">
+    </section>
 
-    <!-- Link to external JavaScript file -->
-    <script src="/static/animation/main.js"></script>
+    <section>
+      <h2 class="text-2xl font-semibold mb-2">3. Interpolation</h2>
+      <p>
+        The naïve approach linearly interpolates both position and rotation:
+      </p>
+      <img src="/static/animation/media_a1/native.png" alt="Naive interpolation" class="rounded-lg shadow my-4">
+
+      <p>
+        To avoid gimbal lock, we instead need quaternion-based
+        <strong>spherical linear interpolation (SLERP)</strong>.
+        I created two C++ Actor Components:
+      </p>
+      <ul class="list-disc list-inside ml-4">
+        <li><strong>Lerp</strong>: homemade position interpolation.</li>
+        <li><strong>Slerp</strong>: converts axis-angle (<code>FRotator</code>) → <code>FQuat</code>, normalizes,
+            performs <code>FQuat::Slerp</code>, normalizes again, and converts back to <code>FRotator</code>.</li>
+      </ul>
+      <img src="/static/animation/media_a1/hm.png" alt="Homemade slerp component" class="rounded-lg shadow mt-4">
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold mb-2">4. Comparison</h2>
+      <p>
+        Finally I wired everything into the Blueprint so I could compare
+        the built-in interpolation with my homemade method.
+      </p>
+      <img src="/static/animation/media_a1/native_vs_hm.png" alt="Comparison blueprint" class="rounded-lg shadow mt-4">
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold mb-2">Results</h2>
+      <div class="space-y-6">
+        <figure>
+          <video src="/static/animation/media_a1/interp_native.mkv" controls class="rounded-lg shadow w-full"></video>
+          <figcaption class="text-sm text-gray-400 mt-1">Built-in Keyframing</figcaption>
+        </figure>
+        <figure>
+          <video src="/static/animation/media_a1/interp_hm.mkv" controls class="rounded-lg shadow w-full"></video>
+          <figcaption class="text-sm text-gray-400 mt-1">Homemade Keyframing (LERP + SLERP)</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold mb-2">Final Notes</h2>
+    <p class="text-red-500">
+      Note: I have to switch z and y axes for the csv because of unreal's coordinate system mismatch.
+    </p>
+      <p>
+        More importantly, this taught me how to use blueprints and C++ together. I am 5 weeks into UE5 and my first
+        impressiong was that everything has to be done in C++. However, blueprints are much better for overall flow
+        with C++ allowing for fine tuning. In future assignments I will try to optimize this. And make my blueprints 
+        more organized if I can. 
+      </p>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer id="foot" class="text-center text-gray-500 py-8 border-t border-gray-800">
+    &copy; 2025 Kevin Land
+  </footer>
+
+  <!-- Your external JS (if needed for animations or other features) -->
+  <script src="/static/animation/main.js"></script>
 </body>
 </html>
