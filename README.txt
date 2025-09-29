@@ -16,6 +16,6 @@ For local development:
 - Navigate to http://127.0.0.1:5000
 
 Actual Cite:
-- run route.py build
+- <python route.py build>
 - Upload the build directory to AWS s3 bucket
 - Navigate to www.kevinland.portfolio

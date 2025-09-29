@@ -1,0 +1,15 @@
+from flask import Blueprint, render_template
+
+animation_bp = Blueprint('animation', __name__)
+
+@animation_bp.route('/a/')
+def animation():
+    return render_template('animation/animation.html')
+
+@animation_bp.route('/a0/')
+def a0():
+    return render_template('animation/a0.html')
+
+@animation_bp.route('/a1/')
+def a1():
+    return render_template('animation/a1.html')

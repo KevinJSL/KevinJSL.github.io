@@ -12,7 +12,7 @@
   <!-- Header -->
   <header class="flex items-center justify-between p-6 bg-white shadow-md">
     <h1 class="text-3xl font-bold text-gray-800">School Work</h1>
-    <a href="{{ url_for('index') }}" class="text-blue-600 hover:underline">← Back to Home</a>
+    <a href="{{ url_for('main.index') }}" class="text-blue-600 hover:underline">← Back to Home</a>
   </header>
 
   <!-- Grid of Classes -->
@@ -21,14 +21,14 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       
       <!-- Animation -->
-      <a href="{{ url_for('animation') }}" 
+      <a href="{{ url_for('animation.animation') }}" 
          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
         <h3 class="text-xl font-bold text-gray-800 mb-2">Animation</h3>
         <p class="text-gray-600">Projects and assignments exploring character and motion design.</p>
       </a>
 
       <!-- Global Illumination -->
-      <a href="{{ url_for('global_illumination') }}" 
+      <a href="{{ url_for('global_illumination.global_illumination') }}" 
          class="block p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
         <h3 class="text-xl font-bold text-gray-800 mb-2">Global Illumination</h3>
         <p class="text-gray-600">Coursework focused on ray tracing and realistic lighting techniques.</p>
