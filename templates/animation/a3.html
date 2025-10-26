@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Particle System | Kevin Land</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/animation/styles.css" />
+</head>
+
+<body class="bg-gray-950 text-gray-100 leading-relaxed">
+
+  <!-- ===== Navigation ===== -->
+  <div id="nav-container"></div>
+  <script>
+    fetch('/static/animation/component.html')
+      .then(r => r.text())
+      .then(html => {
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+        const nav = temp.querySelector('nav');
+        if (nav) document.getElementById('nav-container').appendChild(nav);
+      })
+      .catch(err => console.error('Error loading nav:', err));
+  </script>
+
+  <!-- ===== Main Content ===== -->
+  <main class="max-w-5xl mx-auto px-6 py-12 space-y-10">
+
+    <!-- Header -->
+    <header>
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">Dynamic Particle System in Unreal Engine 5</h1>
+      <p class="text-gray-400">Assignment write-up by Kevin Land</p>
+    </header>
+
+    <!-- Overview -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-3 text-blue-400">Overview</h2>
+      <p>
+        This project expands upon a basic cone-particle generation system by combining Blueprint logic with a custom C++ Actor Component.
+        The goal was to recreate and extend the standard particle emission behavior from the assignment write-up, while adding parameters
+        for visual and dynamic control such as color, gravity, and size interpolation. I used the keyframing from assignment 1 for movement.
+      </p>
+    </section>
+
+    <!-- Blueprint Prototype -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-3 text-blue-400">1. Naïve Blueprint Solution</h2>
+      <p>
+        I began with a <strong>Blueprint-only approach</strong> to generate and animate cone particles.
+        This version was functionally correct but fairly rigid — it lacked flexibility and required a large, repetitive node graph to tweak basic properties.
+      </p>
+    </section>
+
+    <!-- C++ Component -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-3 text-blue-400">2. C++ Actor Component</h2>
+      <p>
+        I then refactored the core logic into a <strong>C++ Actor Component</strong> that handles
+        particle generation, emission direction, and parameter control. This C++ component reproduces
+        the standard cone-emission behavior while exposing several modifiable properties to Blueprints.
+      </p>
+      <ul class="list-disc list-inside space-y-1 mt-2">
+        <li>Base cone emission pattern (radius, spread, and velocity)</li>
+        <li>Adjustable gravity and size interpolation</li>
+        <li>Color interpolation (from green → red)</li>
+        <li>Randomized color mode for dynamic effects</li>
+      </ul>
+    </section>
+
+    <!-- Visual Modifications -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-3 text-blue-400">3. Customization Features</h2>
+      <p>
+        The following parameters are adjustable directly from the component, allowing flexible behavior during runtime or via Blueprint scripting:
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+        <div class="bg-gray-900 p-5 rounded-lg shadow">
+          <h3 class="font-semibold text-lg text-green-400 mb-2">Gravity &amp; Size Interpolation</h3>
+          <p class="text-gray-300 text-sm">
+            Gradually modifies particle gravity and scale over lifetime. This gives the motion a more realistic lift-and-fall dynamic.
+          </p>
+        </div>
+        <div class="bg-gray-900 p-5 rounded-lg shadow">
+          <h3 class="font-semibold text-lg text-red-400 mb-2">Color Interpolation</h3>
+          <p class="text-gray-300 text-sm">
+            Smoothly transitions colors from <span class="text-green-400">green</span> to <span class="text-red-400">red</span> based on lifetime or speed.
+          </p>
+        </div>
+        <div class="bg-gray-900 p-5 rounded-lg shadow md:col-span-2">
+          <h3 class="font-semibold text-lg text-yellow-400 mb-2">Randomized Colors</h3>
+          <p class="text-gray-300 text-sm">
+            A favorite experiment — randomizing RGB components at spawn time creates a lively, energetic effect that’s great for explosion or magic-type visuals.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-3 text-blue-400">4. Visual Results</h2>
+      <p class="text-gray-300 mb-6">
+        Here are a few demonstration videos showing different feature combinations and their outcomes.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <figure>
+          <video controls class="rounded-lg shadow-lg w-full">
+            <source src="/static/animation/media_a3/naive.mkv" type="video/mp4">
+          </video>
+          <figcaption class="text-gray-400 text-sm mt-2">Naïve Blueprint Version</figcaption>
+        </figure>
+        <figure>
+          <video controls class="rounded-lg shadow-lg w-full">
+            <source src="/static/animation/media_a3/standard.mkv" type="video/mp4">
+          </video>
+          <figcaption class="text-gray-400 text-sm mt-2">Standard Version</figcaption>
+        </figure>
+        <figure>
+          <video controls class="rounded-lg shadow-lg w-full">
+            <source src="/static/animation/media_a3/gravity_shrink.mkv" type="video/mp4">
+          </video>
+          <figcaption class="text-gray-400 text-sm mt-2">Gravity + Size Interpolation</figcaption>
+        </figure>
+        <figure>
+          <video controls class="rounded-lg shadow-lg w-full">
+            <source src="/static/animation/media_a3/color_interp.mkv" type="video/mp4">
+          </video>
+          <figcaption class="text-gray-400 text-sm mt-2">Color Interpolation (Green → Red)</figcaption>
+        </figure>
+        <figure class="sm:col-span-2">
+          <video controls class="rounded-lg shadow-lg w-full">
+            <source src="/static/animation/media_a3/random_colors.mkv" type="video/mp4">
+          </video>
+          <figcaption class="text-gray-400 text-sm mt-2">Randomized Colors</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Reflection -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-3 text-blue-400">5. Reflection</h2>
+      <p>
+        This experiment showed how combining C++ components with Blueprint scripting enables much greater flexibility.
+        While the Blueprint prototype was limited and visually rigid, the C++ version allows parameterized behaviors
+        and reusable effects. The random color generation in particular was an unexpected but fun visual improvement.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="text-center text-gray-500 py-8 border-t border-gray-800">
+    &copy; 2025 Kevin Land
+  </footer>
+
+  <script src="/static/animation/main.js"></script>
+</body>
+</html>
