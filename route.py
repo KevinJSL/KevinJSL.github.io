@@ -3,6 +3,7 @@ from flask_frozen import Freezer
 from routes.main import main_bp
 from routes.animation import animation_bp
 from routes.global_illumination import gi_bp
+from routes.quantum import q_bp
 
 def create_app(is_build=False):
     app = Flask(__name__, static_url_path='/static')
@@ -19,6 +20,7 @@ def create_app(is_build=False):
     app.register_blueprint(main_bp)
     app.register_blueprint(animation_bp)
     app.register_blueprint(gi_bp)
+    app.register_blueprint(q_bp)
 
     return app
 

@@ -16,10 +16,85 @@
        class="text-accent-400 text-blue-400 hover:text-blue-300 transition-colors">← Back to Home</a>
   </header>
 
+    <!-- ===== Skill & Course Background ===== -->
+<section class="bg-gray-900 border border-gray-800 rounded-lg p-6 space-y-4">
+  <h2 class="text-2xl font-semibold text-blue-400">Course Background</h2>
+  <p class="text-gray-300">
+    A list of some classes I took at RIT that helped me in developing my skills.
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-gray-200 text-sm">
+    <div>
+      <h3 class="font-semibold text-gray-300 mb-1">Mathematics</h3>
+      <ul class="list-disc list-inside text-gray-400">
+        <li>Calculus</li>
+        <li>Statistics</li>
+        <li>Linear Algebra</li>
+        <li>Discrete Mathematics</li>
+        <li>Analysis of Algorithms</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-gray-300 mb-1">Core Computer Science</h3>
+      <ul class="list-disc list-inside text-gray-400">
+        <li>Intro to Computer Science Theory</li>
+        <li>Concepts of Computer Systems (MIPS Assembly)</li>
+        <li>Principles of Data Management</li>
+        <li>Mechanics of Programming (C)</li>
+        <li>Intro to Cyber Security</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-gray-300 mb-1">Software Development</h3>
+      <ul class="list-disc list-inside text-gray-400">
+        <li>Software Development I (Python)</li>
+        <li>Software Development II (Java)</li>
+        <li>Web &amp; Mobile I</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-gray-300 mb-1">AI &amp; Machine Learning</h3>
+      <ul class="list-disc list-inside text-gray-400">
+        <li>Intro to Artificial Intelligence</li>
+        <li>Intro to Machine Learning</li>
+        <li>Quantum Machine Learning</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-gray-300 mb-1">Graphics &amp; Animation</h3>
+      <ul class="list-disc list-inside text-gray-400">
+        <li>Foundations of Computer Graphics (Rendering)</li>
+        <li>Global Illumination (Ray Tracing)</li>
+        <li>Foundations of Computer Vision</li>
+        <li>Animation Algorithms</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="font-semibold text-gray-300 mb-1">Computation &amp; Physics</h3>
+      <ul class="list-disc list-inside text-gray-400">
+        <li>Mechanics of Programming (Systems-Level C)</li>
+        <li>Quantum Computing Principles</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
   <!-- ===== Main Content ===== -->
   <main class="flex-1 px-6 py-12">
     <!-- Responsive grid: 1 col on small, up to 3 on large -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      
+      <!-- Quantum Computing -->
+      <a href="{{ url_for('quantum.quantum_main') }}"
+         class="block p-8 bg-gray-800 rounded-xl shadow hover:shadow-xl hover:scale-[1.02] transition transform">
+        <h3 class="text-xl font-bold text-gray-50 mb-2">Quantum Computing</h3>
+        <p class="text-gray-300">Coursework I want to showcase from my two quantum classes.</p>
+      </a>
       
       <!-- Animation -->
       <a href="{{ url_for('animation.animation') }}"
