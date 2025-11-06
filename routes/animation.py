@@ -21,3 +21,7 @@ def a2():
 @animation_bp.route('/a3/')
 def a3():
     return render_template('animation/a3.html')
+
+@animation_bp.route('/a4/')
+def a4():
+    return render_template('animation/a4.html')

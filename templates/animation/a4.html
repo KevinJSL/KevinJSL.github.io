@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BVH Motion Parsing | Kevin Land</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/animation/styles.css" />
+</head>
+
+<body class="bg-gray-950 text-gray-100 leading-relaxed">
+
+  <!-- ===== Navigation ===== -->
+  <div id="nav-container"></div>
+  <script>
+    fetch('/static/animation/component.html')
+      .then(r => r.text())
+      .then(html => {
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+        const nav = temp.querySelector('nav');
+        if (nav) document.getElementById('nav-container').appendChild(nav);
+      })
+      .catch(err => console.error('Error loading nav:', err));
+  </script>
+
+  <!-- ===== Main Content ===== -->
+  <main class="max-w-5xl mx-auto px-6 py-12 space-y-10">
+
+    <!-- Header -->
+    <header>
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">BVH Motion Capture Parsing & Animation</h1>
+      <p class="text-gray-400">Final Homework • CSCI 712 — Animation Systems</p>
+    </header>
+
+    <!-- Overview -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-3 text-blue-400">Overview</h2>
+      <p>
+        For this final assignment, I worked with <strong>BVH motion capture files</strong>. The BVH format encodes a joint hierarchy
+        along with per-frame motion data. The system I built parses the file, <strong>dynamically reconstructs the joint hierarchy</strong>,
+        and then applies the frame data at runtime inside Unreal Engine.
+      </p>
+      <p class="mt-3">
+        Motion playback is handled by a <strong>Tick</strong> function that interpolates the animation over time, mapping the BVH
+        rotation frames into UE5 transforms frame-by-frame.
+      </p>
+    </section>
+
+    <!-- Hierarchy & Parsing -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-3 text-blue-400">Parsing the BVH and Building the Joint Hierarchy</h2>
+      <p>
+        The BVH parser reads the hierarchy section first, recursively constructing a tree of joints. Each joint stores:
+      </p>
+      <ul class="list-disc list-inside space-y-1 mt-2">
+        <li>Its name</li>
+        <li>Offset from parent</li>
+        <li>Channels describing translation and rotation order</li>
+        <li>Children (zero or more)</li>
+      </ul>
+      <p class="mt-3">
+        Once the structure is defined, the motion section is parsed into a frame array. During gameplay,
+        the skeleton poses are updated each frame by stepping through this array.
+      </p>
+    </section>
+
+    <!-- Error Explanation -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-3 text-blue-400">Quaternion Order Error</h2>
+      <p>
+        In the demo video, you will notice a slight twisting effect in some joints. This comes from a common pitfall:
+      </p>
+
+      <p class="bg-gray-900 border border-gray-800 rounded-lg p-4 italic mt-4">
+        I multiplied the quaternions in the <strong>wrong order</strong>, which changes the reference frame being rotated.
+      </p>
+
+      <p class="mt-4">
+        BVH rotations are intended to be applied in a specific XYZ or ZYX order depending on the file header.
+        Reversing the multiplication flips the rotation space slightly, resulting in unwanted pre-rotation.
+      </p>
+    </section>
+
+    <!-- SIGGRAPH Video -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-3 text-blue-400">SIGGRAPH-Style Final Animation</h2>
+      <p>
+        Since this was the final homework and we’ve been looking at a lot of animation reels in class,
+        I wanted to do something more fun. I took the BVH animations I had working and edited them into a
+        <strong>SIGGRAPH-style showcase video</strong> — dramatic camera cuts, lighting shifts, and playful character motion.
+      </p>
+      <p class="mt-4">
+        The idea was to celebrate the semester and show what can be done once motion capture, rigging,
+        and runtime interpolation all come together.
+      </p>
+    </section>
+
+    <!-- Video Block -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-3 text-blue-400">Demo Video</h2>
+      <figure class="max-w-4xl mx-auto">
+        <video controls class="rounded-lg shadow-lg w-full">
+          <source src="/static/animation/media_a4/Bento_mocap.mov" type="video/mp4">
+        </video>
+        <figcaption class="text-sm text-gray-400 mt-2 text-center">“Bento Mocap” — Final SIGGRAPH-Style Demo</figcaption>
+      </figure>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="text-center text-gray-500 py-8 border-t border-gray-800">
+    &copy; 2025 Kevin Land
+  </footer>
+
+  <script src="/static/animation/main.js"></script>
+</body>
+</html>
