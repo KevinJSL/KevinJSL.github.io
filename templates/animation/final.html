@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Noise-Augmented Facial Animation | Kevin Land</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --card: #121826;
+      --text: #e5e7eb;
+      --muted: #9aa4b2;
+      --accent: #60a5fa;
+      --highlight: #22d3ee;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      background: linear-gradient(180deg, #0b0e14, #0f1629);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      background: radial-gradient(circle at top, #1e293b, #020617);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      gap: 4rem;
+    }
+
+    section {
+      background: linear-gradient(180deg, #0f172a, #020617);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    h2 {
+      font-size: 1.9rem;
+      margin-bottom: 1.2rem;
+      color: var(--highlight);
+    }
+
+    h3 {
+      margin-top: 2rem;
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: #020617;
+      padding: 1.5rem;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .image-placeholder {
+      background: repeating-linear-gradient(
+        45deg,
+        #020617,
+        #020617 10px,
+        #020617 10px,
+        #060b18 20px
+      );
+      border-radius: 12px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Noise-Augmented Facial Animation for MetaHumans</h1>
+  <p>
+    A real-time system for adding controllable procedural noise to facial motion-captured
+    MetaHuman animations in Unreal Engine 5 to explore realism, stylization, and the uncanny valley.
+  </p>
+</header>
+
+<main>
+
+  <!-- GOAL -->
+  <section>
+    <h2>Project Goal</h2>
+    <p>
+      The goal of this project was to design and implement a system that adds controlled procedural
+      noise to MetaHuman facial animations in Unreal Engine 5. The motivation was to explore whether
+      introducing subtle or exaggerated motion noise could reduce the uncanny valley effect or enable
+      stylistic animation effects.
+    </p>
+    <ul>
+      <li>Operate directly on Live Link–driven facial animation</li>
+      <li>Allow per-facial-feature noise control</li>
+      <li>Remain fully real-time and user-adjustable</li>
+      <li>Support both realistic and stylized animation targets</li>
+    </ul>
+  </section>
+
+  <!-- PROJECT DESCRIPTION & BACKGROUND -->
+  <section>
+    <h2>Project Description & Background</h2>
+
+    <h3>Project Description</h3>
+    <p>
+      This project uses Unreal Engine’s facial animation pipeline to display life-like facial motions
+      on human models. We consider two types of character assets:
+    </p>
+    <ul>
+      <li><strong>MetaHumans (Unreal Engine)</strong> for realistic human faces</li>
+      <li><strong>Custom Ready Player Me characters</strong> for a more cartoon-like style</li>
+    </ul>
+    <p>
+      Our main goal is to experiment with the amount and type of procedural noise applied to
+      individual blendshapes in order to combat the uncanny valley, and to compare how noise
+      behaves on realistic vs. stylized characters. We start with Perlin-style noise (or
+      Perlin-like smooth noise), a classic choice in graphics, and remain open to switching
+      to other noise models if research indicates better options.
+    </p>
+
+    <h3>Blendshapes</h3>
+    <p>
+      Blendshapes are a standard facial animation technique used across DCC tools and game engines.
+      The face is represented as a set of predefined poses (e.g., brows up, jaw open, squint left).
+      In the context of facial mocap pipelines, we often rely on a canonical set of around
+      <strong>51 facial poses</strong> that correspond to common expressions and phonemes. Animation
+      is created by blending these shapes with different weights over time.
+    </p>
+
+    <h3>Perlin Noise</h3>
+    <p>
+      Perlin noise is a smooth, correlated type of pseudo-random signal developed by Ken Perlin in
+      the 1980s. Unlike pure white noise, neighboring values are related, which produces natural
+      and organic-looking variations. This property makes Perlin-style noise a popular choice for
+      procedural motion, camera shake, and subtle micro-movements in animation.
+    </p>
+
+    <h3>Facial Animation Pipeline</h3>
+    <p>
+      We build on Unreal’s official <strong>MetaHuman Animator / Facial Animation Pipeline</strong>.
+      A key reference is the tutorial:
+      <a href="https://www.youtube.com/watch?v=Q1Q7GoYt8K0" target="_blank" rel="noopener noreferrer">
+        MetaHuman Animator Tutorial (YouTube)
+      </a>.
+      The pipeline combines iPhone video capture, Live Link Face data, and Unreal’s MetaHuman rig
+      to reconstruct high-fidelity facial motion and drive a digital character.
+    </p>
+  </section>
+
+  <!-- ALGORITHMS -->
+  <section>
+    <h2>How It Works (Algorithms)</h2>
+    <p>
+      The system is built around applying time-varying procedural noise directly to MetaHuman facial
+      control curves during animation evaluation.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>1. Temporal Noise Generation</h3>
+        <ul>
+          <li>Inputs: world time, noise speed, noise frequency</li>
+          <li>Uses continuous, Perlin-like smooth noise</li>
+          <li>Ensures temporally coherent motion (no jittery pops)</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>2. Feature-Based Control Selection</h3>
+        <ul>
+          <li>User specifies a facial region (e.g., mouth, eyes, squints)</li>
+          <li>System searches for all matching control float names</li>
+          <li>Noise is applied only to the selected subset</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>3. Amplitude Scaling</h3>
+        <ul>
+          <li>Noise magnitude scaled by user-defined amplitude</li>
+          <li>Supports subtle realism → stylized exaggeration</li>
+          <li>Easy to compare “no noise”, “mild noise”, and “extreme noise”</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPLEMENTATION -->
+  <section>
+    <h2>How It Was Built (Implementation)</h2>
+    <ul>
+      <li>Unreal Engine 5 MetaHuman framework</li>
+      <li>Live Link Face app on iPhone for monocular camera input</li>
+      <li>Facial mocap processed through MetaHuman Animator / Capture Manager</li>
+      <li>Control Rig modified using Forward Solve to inject noise</li>
+      <li>Procedural noise implemented using Blueprint logic</li>
+      <li>Feature-specific driven control floats (e.g., squints, mouth shapes)</li>
+    </ul>
+  </section>
+
+  <!-- FACIAL ANIMATION PIPELINE & TOOLS -->
+  <section>
+    <h2>Facial Animation Pipeline & Tools</h2>
+
+    <h3>Tools Overview</h3>
+    <ul>
+      <li><strong>Live Link Face</strong> app (iOS) to record facial video and send live data.</li>
+      <li><strong>Live Link Hub</strong> in Unreal for managing capture and processing.</li>
+      <li><strong>MetaHuman Animator</strong> for turning monocular footage into facial performance data.</li>
+      <li><strong>Sequencer</strong> for organizing and exporting the final animation clips.</li>
+    </ul>
+
+    <h3>Recording the Source Video</h3>
+    <ul>
+      <li>Use the <strong>Live Link Face</strong> app on iPhone.</li>
+      <li>Hold the phone horizontally, with the home button (or bottom edge) on the left.</li>
+      <li>Record a clean take of your performance (neutral pose at start helps).</li>
+    </ul>
+
+    <h3>Using Live Link Hub / Capture Manager</h3>
+    <ul>
+      <li>In Unreal Engine, open <strong>Tools &gt; Live Link Hub</strong>.</li>
+      <li>In the Hub, set the <strong>Live Data</strong> dropdown to <strong>Capture Manager</strong>.</li>
+      <li><strong>Add Device</strong> → choose <strong>Mono</strong> for monocular input.</li>
+      <li>Select the Mono device and set the <strong>Take Directory</strong> where clips will be saved.</li>
+      <li>Add your recorded clip to the <strong>Queue</strong> and start the process.</li>
+      <li>
+        If processing stalls at ~<strong>99.8%</strong>, check the <strong>Output Log</strong>.
+        A common issue is that the clip name is already in use; renaming the clip usually fixes it.
+      </li>
+    </ul>
+
+    <h3>Creating a MetaHuman Performance Asset</h3>
+    <ul>
+      <li>Create a <strong>Motions</strong> folder to organize your outputs.</li>
+      <li>Inside it, add a <strong>MetaHuman Performance</strong> asset.</li>
+      <li>Set the <strong>Input Type</strong> to <strong>Monocular</strong>.</li>
+      <li>Assign the recorded <strong>Footage Capture Data</strong> from the Hub.</li>
+      <li>Add a <strong>Visualization Mesh</strong> (your target MetaHuman).</li>
+      <li>Disable head movement if you want the head to remain stable and only drive facial motion.</li>
+      <li>Run the <strong>Process</strong> step to generate the performance asset.</li>
+    </ul>
+
+    <h3>Exporting to Your Character</h3>
+    <ul>
+      <li>After processing, export the animation and set the correct <strong>Target Skeleton</strong>.</li>
+      <li>Ensure the MetaHuman (or custom character) is properly rigged and bound to the facial skeleton.</li>
+      <li>Use a <strong>Sequence Leveler</strong> or Sequencer to manage the overall timing and blending of the animation.</li>
+    </ul>
+  </section>
+
+  <!-- WORKFLOW PIPELINE -->
+  <section>
+    <h2>End-to-End Workflow Pipeline</h2>
+    <ol>
+      <li><strong>Record a video of yourself</strong> using Live Link Face (horizontal phone, good lighting).</li>
+      <li><strong>Create a MetaHuman</strong> (realistic) or import a <strong>Ready Player Me</strong> character (cartoon).</li>
+      <li>
+        <strong>Use Live Link Hub &amp; MetaHuman Animator</strong> to:
+        <ul>
+          <li>Load the recorded video as monocular footage.</li>
+          <li>Generate blendshape curves for the MetaHuman performance.</li>
+          <li>Confirm that facial animation plays correctly on the character.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Modify the facial Control Rig</strong>:
+        <ul>
+          <li>Hook into the <strong>Forward Solve</strong> event.</li>
+          <li>Add functions to generate and apply procedural noise to selected control floats.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Generate noise</strong> per frame:
+        <ul>
+          <li>Use inputs: <em>delta time</em>, <em>noise speed</em>, and <em>noise frequency</em>.</li>
+          <li>Compute a Perlin-like noise value.</li>
+          <li>Multiply by an <strong>amplitude</strong> parameter.</li>
+          <li>Store this in a shared <strong>Noise</strong> variable for reuse.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Apply noise</strong> to selected controls:
+        <ul>
+          <li>Loop over all facial control float names of interest (e.g., squint_left, squint_right).</li>
+          <li>Read the current control float value, add the noise, and write back a new value.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>Compile and preview</strong>:
+        <ul>
+          <li>After compiling the Control Rig, the Sequencer track that came from Live Link / MetaHuman Animator now includes noise-modified facial curves.</li>
+          <li>Export the final animation and use it wherever you want in Unreal Engine (cinematics, gameplay, etc.).</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <!-- BLUEPRINT FUNCTIONS -->
+  <section>
+    <h2>Core Blueprint Functions</h2>
+
+    <h3>1. Generate Noise Function</h3>
+    <div class="card">
+      <ul>
+        <li>Inputs: world time (or delta time), noise speed, noise frequency</li>
+        <li>Computes a smooth procedural noise value every frame</li>
+        <li>Multiplies by a user-controlled amplitude slider</li>
+        <li>Stores result in a shared noise variable for later use</li>
+        <li>Ensures temporally coherent micro-motions on the face</li>
+      </ul>
+      <img
+        width="800"
+        src="/static/animation/media_final/generate.png"
+        alt="Generate noise Blueprint"
+      >
+    </div>
+
+    <h3>2. Apply Noise Function</h3>
+    <div class="card">
+      <ul>
+        <li>User selects a facial feature group (e.g., mouth, squints) to target.</li>
+        <li>A loop searches all control floats whose names match that region.</li>
+        <li>For each control float, the system reads the current value.</li>
+        <li>Adds the generated noise and writes back a new control float value.</li>
+        <li>
+          The modified controls are then passed down the Control Rig graph as part of the
+          normal evaluation.
+        </li>
+      </ul>
+      <img
+        width="800"
+        src="/static/animation/media_final/apply.png"
+        alt="Apply noise Blueprint"
+      >
+    </div>
+
+    <h3>3. Inside the Control Rig</h3>
+    <div class="card">
+      <ul>
+        <li>Noise logic is executed inside the <strong>Forward Solve</strong> event.</li>
+        <li>Forward Solve preprocesses the facial controls before final pose evaluation.</li>
+        <li>A dedicated flag lets the user turn noise on or off at runtime.</li>
+      </ul>
+      <img
+        width="800"
+        src="/static/animation/media_final/forward_solve.png"
+        alt="Control Rig Blueprint"
+      >
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section>
+    <h2>Results & Visual Output</h2>
+    <p>
+      The system successfully demonstrates controllable procedural noise effects across different
+      animation styles. Users can dynamically adjust noise levels to explore realism, exaggeration,
+      and stylized motion in real time, and compare the behavior on both realistic MetaHumans and
+      cartoon-like characters.
+    </p>
+
+    <video controls width="800">
+      <source src="/static/animation/media_final/Animation_Final_vid.mov" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <!-- RESEARCH & RESOURCES -->
+  <section>
+    <h2>Research & Resources</h2>
+    <p>
+      This project sits at the intersection of real-time graphics, performance capture, and
+      perceptual studies of the uncanny valley. Future iterations may incorporate data-driven
+      approaches to learn noise patterns directly from real footage.
+    </p>
+
+    <h3>Key References</h3>
+    <ul>
+      <li>
+        <strong>Facial Animation Pipeline (UE5 / MetaHuman Animator)</strong><br />
+        <a href="https://www.youtube.com/watch?v=Q1Q7GoYt8K0" target="_blank" rel="noopener noreferrer">
+          Official MetaHuman Animator &amp; Live Link Hub Tutorial (YouTube)
+        </a>
+      </li>
+      <li>
+        <strong>Live Link Face App</strong> — iOS app used to capture monocular facial footage and
+        stream it into Unreal Engine.
+      </li>
+      <li>
+        Background reading on <strong>blendshapes</strong> and <strong>facial rigs</strong> in modern
+        animation pipelines (Maya, Blender, Unreal).
+      </li>
+      <li>
+        Classic work on <strong>Perlin noise</strong> and procedural motion in computer graphics.
+      </li>
+    </ul>
+
+    <p>
+      This section can be extended as a living bibliography and link hub for papers, talks, and
+      technical documentation used throughout the project.
+    </p>
+  </section>
+
+  <!-- FUTURE WORK -->
+  <section>
+    <h2>Future Work</h2>
+    <ul>
+      <li>
+        This work focused primarily on building the system to inject noise. More systematic
+        experiments are needed to understand which noise parameters best reduce the uncanny
+        valley versus which simply introduce distraction.
+      </li>
+      <li>
+        Extend the workflow to cartoon characters (e.g., Ready Player Me) to compare how noise
+        impacts realism vs. artistic stylization across very different facial designs.
+      </li>
+      <li>
+        Explore machine learning–based approaches for synthesizing noise patterns, potentially
+        learning micro-expression statistics from high-speed facial capture and applying them
+        back onto MetaHumans.
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <p>© Kevin Land — Unreal Engine 5 Facial Animation Research</p>
+</footer>
+
+</body>
+</html>
